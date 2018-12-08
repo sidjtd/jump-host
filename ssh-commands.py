@@ -8,7 +8,7 @@ import csv
 
 the_usr = 'jason'
 the_port = '22'
-the_host = '104.248.191.147'
+the_host = '104.248.191.147'   
 ip_pattern = '\(*\d{2,3}(\.\d{1,3}){3}\)*'
 mac_pattern = '[0-9a-f]{2}([-:]?)[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$'
 private_pattern = '\(*(?:10|172|192)(\.\d{3}){3}\)*'
@@ -26,10 +26,13 @@ def sort_list(arr):
         ip = sections[1]
         mac = sections[3]
 
+        print('Alternate IP addresses associated with provided address', ip)
         # If address is valid but not a private address, continue
-        if(not re.match(private_pattern, ip) and re.match(ip_pattern, ip)):
-    
-            if(re.match(mac_pattern, mac)):
+        # if(not re.match(private_pattern, ip) and re.match(ip_pattern, ip)):
+            # print('This address has the following connections:', ip)
+
+            # If Mac is valid, enter as valid 
+            # if(re.match(mac_pattern, mac)):
 
             # results.private
 
@@ -46,9 +49,7 @@ def proxy_connect(host, port, usr, pw, remote_host, remote_port, remote_usr):
         res_by_line = output.decode().split('\n')
         sort_list(res_by_line)
 
-
         while(True):
-            print('this is the status of active', ssh_session.active)
             if ssh_session.active:
                 command = input(" >>> Input: ")
                 client.invoke_shell()
